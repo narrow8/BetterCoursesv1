@@ -54,6 +54,8 @@ namespace BetterCourses
                     image.Save("cc0.bmp");
                     pictureBox1.Image = image;
 
+                    textBox1.Text += (time / 60).ToString() + ":0" + (time % 60).ToString() +
+                                    Environment.NewLine;
                     MakeAnalysisRequest("cc0.bmp");
                 }
 
