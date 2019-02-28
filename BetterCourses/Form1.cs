@@ -32,7 +32,7 @@ namespace BetterCourses
 
         string[] photos = new string[200];
 
-        const int interval = 30;
+        const int interval = 10;
         static bool opened = false;
 
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -181,14 +181,22 @@ namespace BetterCourses
                         ii ++;
                     }
 
-                    if (textBox1.InvokeRequired)
+                    if (chart1.InvokeRequired)
                     {
-                        textBox1.Invoke(new Action(() => textBox1.Text += "Attention rate: "
-                                                                 + (room.getFocus() * 100).ToString()
-                                                                 + Environment.NewLine));
+                        if (time % 60 < 10)
+                            chart1.Series["Attention Rate"].Points.AddXY(((time / 60).ToString() + ":0" + (time % 60).ToString()),
+                                        room.getFocus() * 100);
+                        else
+                            chart1.Series["Attention Rate"].Points.AddXY(((time / 60).ToString() + ":" + (time % 60).ToString()),
+                                        room.getFocus() * 100);
                     }
                     else
-                        textBox1.Text += "Attention rate: " + (room.getFocus() * 100).ToString() + Environment.NewLine;
+                        if (time % 60 < 10)
+                            chart1.Series["Attention Rate"].Points.AddXY(((time / 60).ToString() + ":0" + (time % 60).ToString()),
+                                    room.getFocus() * 100);
+                        else
+                            chart1.Series["Attention Rate"].Points.AddXY(((time / 60).ToString() + ":" + (time % 60).ToString()),
+                                    room.getFocus() * 100);
 
                     bmp.Dispose();
                 }
