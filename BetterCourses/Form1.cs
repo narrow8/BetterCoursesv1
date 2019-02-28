@@ -32,7 +32,7 @@ namespace BetterCourses
 
         string[] photos = new string[200];
 
-        const int interval = 5;
+        const int interval = 30;
         static bool opened = false;
 
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
